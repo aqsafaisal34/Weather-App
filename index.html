@@ -10,27 +10,35 @@
     <style>
         body {
             text-align: center;
-            background-image: url(images/1_GsImz-edoeuqCMfKxDus0w.jpeg);
+            background-image: url(images/images.jpeg);
             background-repeat: no-repeat;
             background-size: cover;
-            font-style: italic;
-           
+          
+
         }
 
-       .result{
-        margin-top: 20px;
-        
-       }
-       form{
-        margin-top: 40px;
-        
-       }
-       #button{
-        background-color: rgba(179, 208, 231, 0.183);
-        border-radius: 10px;
-        color: white;
-       }
-       
+        .result {
+            margin-top: 20px;
+            color: white;
+            font-style: italic;
+
+        }
+
+        form {
+            margin-top: 40px;
+            color: white;
+            font-size: large;
+            font-weight: bolder;
+
+        }
+
+        #button {
+            background-color: rgba(179, 208, 231, 0.183);
+            border: 2px solid black;
+            border-radius: 10px;
+            color: white;
+            font-weight: bolder;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
@@ -43,10 +51,13 @@
     </form>
 
     <div class="result">
-        <h3 id="location"></h3>
+        <h3 id="name"></h3>
+        <h3 id="region"></h3>
+        <h3 id="country"></h3>
+        <h3 id="area"></h3>
+        <h3 id="condition"></h3>
         <h3 id="cityTemp"></h3>
-        <h4 id="condition"></h4>
-        <h4 id="citydate"></h4>
+        <h3 id="citydate"></h3>
 
     </div>
 
@@ -59,27 +70,38 @@
             axios.get(`https://api.weatherapi.com/v1/current.json?key=9e677878b6c141ee8f8141723222907&q=${cityName}&aqi=no`)
                 .then(function (response) {
                     let weatherData = response.data;
-                    
 
-        document.querySelector("#location").innerHTML = `Country:'${weatherData.location.country}'`
+                    console.log(weatherData);
 
-        document.querySelector("#location").innerHTML = `Region: ${weatherData.location.region}`
+                    document.querySelector("#name").innerHTML = `Location:   ${weatherData.location.name}`;
 
-         document.querySelector("#location").innerHTML = `Location:   ${weatherData.location.name}`
+                    document.querySelector("#region").innerHTML = `Region: ${weatherData.location.region}`;
 
-         document.querySelector("#cityTemp").innerHTML = `Temperature:  ${weatherData.current.temp_c}&#8451;`
-        
-         document.querySelector("#condition").innerHTML = `Area Condition:  ${weatherData.current.condition.text}`
-        
-         document.querySelector("#citydate").innerHTML = `Date and Time:    ${weatherData.location.localtime}`
 
-         document.querySelector("#cityName").innerHTML = ""
+                    document.querySelector("#country").innerHTML = `Country:${weatherData.location.country}`;
+
+
+
+                    document.querySelector("#area").innerHTML = `Area Condition:  ${weatherData.current.condition.text}`;
+
+                    document.querySelector("#condition").innerHTML = `<img src= "https:${weatherData.current.condition.icon}">`;
+
+
+
+                    document.querySelector("#cityTemp").innerHTML = `Temperature:  ${weatherData.current.temp_c}&#8451;`;
+
+
+
+
+                    document.querySelector("#citydate").innerHTML = `Date and Time:    ${weatherData.location.localtime}`
+
+                    document.querySelector("#cityName").innerHTML = ""
                 })
-                
-        .catch(function (error) {
 
-            console.log(error);
-        })
+                .catch(function (error) {
+
+                    console.log(error);
+                })
 
         }
 
