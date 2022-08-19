@@ -69,8 +69,8 @@
         function weathercheck() {
 
             let cityName = document.querySelector("#cityName").value
-
-            axios.get(`https://api.weatherapi.com/v1/current.json?key=9e677878b6c141ee8f8141723222907&q=${cityName}&aqi=no`)
+            
+            axios.get(`http://api.weatherstack.com/current?access_key=a5d3976574dc152b27f9af295cdaf2eb&query=${cityName}`)
                 .then(function (response) {
                     let weatherData = response.data;
 
@@ -85,22 +85,22 @@
 
 
 
-                    document.querySelector("#area").innerHTML = `Area Condition:  ${weatherData.current.condition.text}`;
+                    document.querySelector("#area").innerHTML = `Area Condition:  ${weatherData.current.weather_descriptions}`;
 
-                    document.querySelector("#condition").innerHTML = `<img src= "https:${weatherData.current.condition.icon}">`;
-
-
-
-                    document.querySelector("#cityTemp").innerHTML = `Temperature:  ${weatherData.current.temp_c}&#8451;`;
+                    document.querySelector("#condition").innerHTML = `<img src= "https:${weatherData.current.weather_icons}">`;
 
 
 
+                    document.querySelector("#cityTemp").innerHTML = `Temperature:  ${weatherData.current.temperature}&#8451;`;
 
-                    document.querySelector("#citydate").innerHTML = `Date and Time:    ${weatherData.location.localtime}`
+
+
+
+                //     document.querySelector("#citydate").innerHTML = `Date and Time:    ${weatherData.location.localtime}`
 
                     document.querySelector("#cityName").innerHTML = ""
                 })
-
+                
                 .catch(function (error) {
 
                     console.log(error);
